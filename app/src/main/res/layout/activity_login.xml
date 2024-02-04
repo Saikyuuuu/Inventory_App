@@ -169,13 +169,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/SignUpBtn"
+        android:id="@+id/RegisterBtn"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/login_button"
         android:gravity="center"
-        android:text="Sign Up"
+        android:text="Register"
         android:textColor="@color/white"
         android:textSize="18dp"
         android:layout_marginTop="30dp"
