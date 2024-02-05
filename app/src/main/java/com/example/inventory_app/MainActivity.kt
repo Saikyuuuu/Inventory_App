@@ -14,16 +14,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
-    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val signUpBtn = findViewById<Button>(R.id.RegisterBtn)
-            signUpBtn.setOnClickListener{
-                val intent = Intent(this,SignUpActivity::class.java)
-                startActivity(intent)
-        }
+
+
+
 //        val logInBtn = findViewById<Button>(R.id.LoginBtn)
 //        logInBtn.setOnClickListener{
 //            val intent = Intent(this,DashboardActivity::class.java)
@@ -33,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         firebaseAuth = FirebaseAuth.getInstance()
+
+        binding.Register.setOnClickListener{
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
 
 
         binding.LoginBtn.setOnClickListener{
