@@ -26,7 +26,7 @@ class UploadActivity : AppCompatActivity() {
             val quantityIn = binding.QuantityIn.text.toString()
             val priceIn = binding.PriceIn.text.toString()
 
-            databaseReference = FirebaseDatabase.getInstance().getReference("Item Information")
+            databaseReference = FirebaseDatabase.getInstance().getReference("In Information")
             val itemData = ItemData(itemNameIn, quantityIn, priceIn)
 
             // Get the count of existing items to determine the new key
@@ -56,5 +56,45 @@ class UploadActivity : AppCompatActivity() {
                 }
             })
         }
+        binding.deleteBtn.setOnClickListener {
+            val itemNameOut = binding.ItemNameOut.text.toString()
+            val quantityOut = binding.QuantityOut.text.toString()
+            val priceOut = binding.PriceOut.text.toString()
+
+            databaseReference = FirebaseDatabase.getInstance().getReference("Out Information")
+            val itemData = ItemData(itemNameOut, quantityOut, priceOut)
+
+            // Get the count of existing items to determine the new key
+            databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val newItemKey =
+                        dataSnapshot.childrenCount + 1 // Generate unique key based on count
+                    val newItemRef = databaseReference.child("ID $newItemKey")
+
+                    newItemRef.setValue(itemData).addOnSuccessListener {
+                        binding.ItemNameOut.text.clear()
+                        binding.QuantityOut.text.clear()
+                        binding.PriceOut.text.clear()
+
+                        Toast.makeText(this@UploadActivity, "Saved", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@UploadActivity, UploadActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    }.addOnFailureListener {
+                        Toast.makeText(this@UploadActivity, "Failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle error
+                }
+            })
+        }
+
+
+
+
+
     }
 }
