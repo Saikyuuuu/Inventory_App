@@ -21,5 +21,9 @@ class OnboardingActivity : AppCompatActivity() {
             val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
         }
+        binding.PosBtn.setOnClickListener{
+            val intent = Intent(this, UploadActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
